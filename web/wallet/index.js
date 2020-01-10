@@ -28,7 +28,6 @@
 
   if (responseMode == "form_post") {
     window.authenticate = function authenticate(event) {
-      // window.top.location.replace(redirect + "?id_token=" + signedToken);
       formPost(signedToken, redirect);
     };
   } else {
