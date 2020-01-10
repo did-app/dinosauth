@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^4.17.1",
+    "openid-client": "^3.11.0",
     "pug": "^2.0.4"
   },
   "devDependencies": {

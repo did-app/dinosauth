@@ -1,6 +1,7 @@
 version: "2"
 
 volumes:
+  node_modules:
   express_js_server_node_modules:
 services:
   express_js:
@@ -12,3 +13,13 @@ services:
       - express_js_server_node_modules:/opt/app/node_modules
     ports:
       - 3000:3000
+
+  dinosauth:
+    image: node:11.14.0
+    working_dir: "/opt/app"
+    command: npm run start:dev
+    volumes:
+      - .:/opt/app
+      - node_modules:/opt/app/node_modules
+    ports:
+      - 8080:8080
