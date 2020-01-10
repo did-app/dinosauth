@@ -19,6 +19,7 @@ Issuer.discover("http://localhost:8080") // => Promise
 
 const app = express();
 
+app.use(express.urlencoded());
 app.set("view engine", "pug");
 
 app.get("/", function(req, res) {
@@ -27,11 +28,12 @@ app.get("/", function(req, res) {
 
 app.get("/sign-in", function(req, res) {
   authUrl = client.authorizationUrl({
-    scope: "openid"
+    scope: "openid",
+    response_mode: "form_post"
   });
   res.redirect(authUrl);
 });
-app.get("/callback", function(req, res) {
+app.post("/callback", function(req, res) {
   const params = client.callbackParams(req);
   client
     .callback("https://client.example.com/callback", params, {})

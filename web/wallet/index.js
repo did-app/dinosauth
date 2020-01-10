@@ -3,6 +3,7 @@
 (async function() {
   const params = new URLSearchParams(window.location.search);
   const redirect = params.get("client_id");
+  const responseMode = params.get("response_mode") || "form_post";
 
   const keyPair = await Keypairs.generate({
     kty: "ECDSA",
@@ -25,7 +26,31 @@
     }
   });
 
-  window.authenticate = function authenticate(event) {
-    window.top.location.replace(redirect + "?id_token=" + signedToken);
-  };
+  if (responseMode == "form_post") {
+    window.authenticate = function authenticate(event) {
+      // window.top.location.replace(redirect + "?id_token=" + signedToken);
+      formPost(signedToken, redirect);
+    };
+  } else {
+    throw "unknown response mode";
+  }
 })();
+
+function formPost(signedToken, callbackUrl) {
+  var $form = document.createElement("form");
+  var $input = document.createElement("input");
+
+  $form.method = "POST";
+  $form.action = callbackUrl;
+
+  $input.type = "hidden";
+  $input.name = "id_token";
+  $input.value = signedToken;
+  $form.appendChild($input);
+
+  // https://stackoverflow.com/a/27386102/1187299
+  // form must be appended to body to post
+  document.body.appendChild($form);
+
+  $form.submit();
+}
