@@ -13,5 +13,5 @@ Reference: https://openid.net/specs/openid-connect-core-1_0.html#SelfIssued
 
 #### Goals
 
-- [ ] Authenticate in multipage applications using the `form_post` response mode.
+- [x] Authenticate in multipage applications using the `form_post` response mode.
 - [ ] Authenticate in Single Page Applications (SPA) using the `fragment` response mode.

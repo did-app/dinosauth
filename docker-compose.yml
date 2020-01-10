@@ -1,0 +1,27 @@
+version: "2"
+
+volumes:
+  node_modules:
+  express_js_server_node_modules:
+services:
+  express_js:
+    image: node:11.14.0
+    working_dir: "/opt/app"
+    command: npm run start:dev
+    volumes:
+      - ./examples/express_js/server:/opt/app
+      - express_js_server_node_modules:/opt/app/node_modules
+    network_mode: host
+    ports:
+      - 3000:3000
+
+  dinosauth:
+    image: node:11.14.0
+    working_dir: "/opt/app"
+    command: npm run start:dev
+    volumes:
+      - .:/opt/app
+      - node_modules:/opt/app/node_modules
+    network_mode: host
+    ports:
+      - 8080:8080
