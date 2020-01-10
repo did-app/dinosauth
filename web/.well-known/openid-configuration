@@ -1,0 +1,4 @@
+{
+  "issuer": "https://self-issued.me",
+  "authorization_endpoint": "http://localhost:8080/wallet"
+}

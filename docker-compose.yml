@@ -11,6 +11,7 @@ services:
     volumes:
       - ./examples/express_js/server:/opt/app
       - express_js_server_node_modules:/opt/app/node_modules
+    network_mode: host
     ports:
       - 3000:3000
 
@@ -21,5 +22,6 @@ services:
     volumes:
       - .:/opt/app
       - node_modules:/opt/app/node_modules
+    network_mode: host
     ports:
       - 8080:8080
