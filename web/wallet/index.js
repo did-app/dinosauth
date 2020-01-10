@@ -30,10 +30,21 @@
     window.authenticate = function authenticate(event) {
       formPost(signedToken, redirect);
     };
+  } else if (responseMode == "fragment") {
+    window.authenticate = function authenticate(event) {
+      fragmentRedirect(signedToken, redirect);
+    };
   } else {
     throw "unknown response mode";
   }
 })();
+
+function fragmentRedirect(signedToken, redirect) {
+  // https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#Combinations
+  // This spec shows the example as just # the url encoded key values
+  // Users can put their own hash in the URl so for Vue we can have the redirect as #/callback
+  window.top.location.href = redirect + "#id_token=" + signedToken;
+}
 
 function formPost(signedToken, callbackUrl) {
   var $form = document.createElement("form");

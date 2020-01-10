@@ -20,6 +20,7 @@ Issuer.discover("http://localhost:8080") // => Promise
 const app = express();
 
 app.use(express.urlencoded());
+app.use(express.static("public"));
 app.set("view engine", "pug");
 
 app.get("/", function(req, res) {
